@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="回聲資料室：虛構網頁解謎作品">
+  <meta name="description" content="岬角地方文化數位保存中心資料復原版">
   <title>岬角地方文化數位保存中心｜資料復原版</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="fiction">本網站為虛構解謎作品，所有機構、人物與事件皆為原創虛構。</div>
   <main class="site-shell">
     <header>
       <div class="restore">資料復原版｜最後整理：2008.11</div>
@@ -16,23 +15,29 @@
       <p>望潮鎮地方記憶數位典藏計畫</p>
     </header>
     <nav aria-label="主要導覽">
-      <button data-route="home">首頁</button>
-      <button data-route="about">中心簡介</button>
-      <button data-route="news">最新消息</button>
-      <button data-route="staff">工作人員</button>
-      <button data-route="sitemap">網站導覽</button>
+      <a href="#home">首頁</a>
+      <a href="#about">中心簡介</a>
+      <a href="#news">最新消息</a>
+      <a href="#staff">工作人員</a>
+      <a href="#sitemap">網站導覽</a>
     </nav>
     <section class="layout">
       <aside>
-        <h2>調查進度</h2>
-        <ol id="progress"></ol>
-        <button id="hintButton">需要提示</button>
-        <div id="hint" aria-live="polite"></div>
-        <button id="resetButton" class="quiet">清除進度</button>
+        <h2>站內選單</h2>
+        <ul>
+          <li><a href="#news">最新消息</a></li>
+          <li><a href="#notice2007">系統維護說明</a></li>
+          <li><a href="#staff">人員名錄</a></li>
+          <li><a href="#sitemap">文字版網站導覽</a></li>
+        </ul>
+        <div class="counter">本站資料復原後瀏覽人次：001284</div>
       </aside>
       <article id="content" tabindex="-1" aria-live="polite"></article>
     </section>
-    <footer>© 2008 岬角地方文化數位保存中心（虛構作品）｜<a href="#sitemap">網站導覽</a></footer>
+    <footer>
+      © 2008 岬角地方文化數位保存中心｜<a href="#sitemap">網站導覽</a><br>
+      <span class="fiction-note">本網站為虛構解謎作品，所有機構、人物與事件皆為原創虛構。</span>
+    </footer>
   </main>
   <script type="module" src="app.js"></script>
 </body>
