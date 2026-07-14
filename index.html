@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="回聲資料室：虛構網頁解謎作品">
+  <title>岬角地方文化數位保存中心｜資料復原版</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="fiction">本網站為虛構解謎作品，所有機構、人物與事件皆為原創虛構。</div>
+  <main class="site-shell">
+    <header>
+      <div class="restore">資料復原版｜最後整理：2008.11</div>
+      <h1>岬角地方文化數位保存中心</h1>
+      <p>望潮鎮地方記憶數位典藏計畫</p>
+    </header>
+    <nav aria-label="主要導覽">
+      <button data-route="home">首頁</button>
+      <button data-route="about">中心簡介</button>
+      <button data-route="news">最新消息</button>
+      <button data-route="staff">工作人員</button>
+      <button data-route="sitemap">網站導覽</button>
+    </nav>
+    <section class="layout">
+      <aside>
+        <h2>調查進度</h2>
+        <ol id="progress"></ol>
+        <button id="hintButton">需要提示</button>
+        <div id="hint" aria-live="polite"></div>
+        <button id="resetButton" class="quiet">清除進度</button>
+      </aside>
+      <article id="content" tabindex="-1" aria-live="polite"></article>
+    </section>
+    <footer>© 2008 岬角地方文化數位保存中心（虛構作品）｜<a href="#sitemap">網站導覽</a></footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
