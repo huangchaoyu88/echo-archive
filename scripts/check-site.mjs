@@ -4,10 +4,10 @@ import path from 'node:path';
 const root = process.cwd();
 const ignoredDirs = new Set(['.git', '.github', 'node_modules', 'scripts']);
 const required = [
-  'index.html','about.html','news.html','exhibit.html','photo.html','records.html',
+  'index.html','about.html','news.html','exhibit.html','gallery.html','photo.html','records.html',
   'roster.html','broadcast.html','mail.html','revision.html','restore.html','log.html',
   'letter.html','sitemap.html','404.html','styles.css',
-  'assets/group-photo.svg','assets/tape.svg','assets/roster.svg'
+  'assets/group-photo.svg','assets/tape.svg','assets/roster.svg','assets/archive-board.jpg'
 ];
 const forbidden = [
   '<button', 'data-answer', 'data-record', 'echoArchiveProgress', 'localStorage',
