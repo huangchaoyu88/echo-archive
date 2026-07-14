@@ -32,8 +32,8 @@ function walk(dir) {
 }
 
 const files = walk(root);
-const publicTextFiles = files.filter(f => /\.(html|css|js|json|xml|txt|md)$/i.test(f));
-for (const file of publicTextFiles) {
+const deployedTextFiles = files.filter(f => /\.(html|css|js|json|xml|txt)$/i.test(f));
+for (const file of deployedTextFiles) {
   const text = fs.readFileSync(file, 'utf8');
   for (const token of forbidden) {
     if (text.includes(token)) failures.push(`${path.relative(root,file)} 含禁止內容：${token}`);
