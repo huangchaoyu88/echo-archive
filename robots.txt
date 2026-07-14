@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /audit-drafts/
+
+# 維護備註：一般使用者請由網站內「資料核對」入口進入，無須修改網址。
