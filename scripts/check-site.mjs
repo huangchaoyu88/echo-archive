@@ -7,7 +7,7 @@ const required = [
   'index.html','about.html','news.html','exhibit.html','gallery.html','photo.html','records.html',
   'roster.html','broadcast.html','mail.html','revision.html','restore.html','log.html',
   'letter.html','sitemap.html','404.html','styles.css',
-  'assets/group-photo.svg','assets/tape.svg','assets/roster.svg','assets/archive-board.jpg'
+  'assets/group-photo.svg','assets/tape.svg','assets/roster.svg','assets/archive-board-v3.jpg'
 ];
 const forbidden = [
   '<button', 'data-answer', 'data-record', 'echoArchiveProgress', 'localStorage',
@@ -56,6 +56,13 @@ for (const file of htmlFiles) {
   }
 }
 
+const jpegPath = path.join(root, 'assets/archive-board-v3.jpg');
+if (fs.existsSync(jpegPath)) {
+  const jpeg = fs.readFileSync(jpegPath);
+  const validJpeg = jpeg.length > 4 && jpeg[0] === 0xff && jpeg[1] === 0xd8 && jpeg.at(-2) === 0xff && jpeg.at(-1) === 0xd9;
+  if (!validJpeg) failures.push('assets/archive-board-v3.jpg 不是有效 JPEG 二進位檔');
+}
+
 if (fs.existsSync(path.join(root, 'app.js'))) failures.push('舊版 app.js 仍存在');
 if (fs.existsSync(path.join(root, 'data'))) failures.push('舊版 data 目錄仍存在');
 
@@ -64,4 +71,4 @@ if (failures.length) {
   failures.forEach(x => console.error(`- ${x}`));
   process.exit(1);
 }
-console.log(`Echo Archive v2 發布檢查通過：${htmlFiles.length} 個 HTML 頁面，所有本機連結與資產存在，未發現遊戲 UI。`);
+console.log(`Echo Archive v2 發布檢查通過：${htmlFiles.length} 個 HTML 頁面，所有本機連結與資產存在，JPEG 格式有效，未發現遊戲 UI。`);
