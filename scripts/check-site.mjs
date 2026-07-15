@@ -7,7 +7,7 @@ const required = [
   'index.html','about.html','news.html','exhibit.html','gallery.html','photo.html','records.html',
   'roster.html','broadcast.html','mail.html','revision.html','restore.html','log.html',
   'letter.html','sitemap.html','404.html','styles.css',
-  'assets/photo-group-1993.jpg','assets/roster-final.jpg','assets/tape-final.jpg'
+  'assets/photo-group-1993-4mp.jpg','assets/roster-final.jpg','assets/tape-final.jpg'
 ];
 const forbidden = [
   '<button', 'data-answer', 'data-record', 'echoArchiveProgress', 'localStorage',
@@ -59,7 +59,7 @@ for (const file of htmlFiles) {
   }
 }
 
-for (const jpgName of ['photo-group-1993.jpg','roster-final.jpg','tape-final.jpg']) {
+for (const jpgName of ['photo-group-1993-4mp.jpg','roster-final.jpg','tape-final.jpg']) {
   const jpgPath = path.join(root, 'assets', jpgName);
   if (fs.existsSync(jpgPath)) {
     const head = fs.readFileSync(jpgPath).subarray(0, 3);
@@ -67,6 +67,11 @@ for (const jpgName of ['photo-group-1993.jpg','roster-final.jpg','tape-final.jpg
       failures.push(`assets/${jpgName} 不是有效 JPEG`);
     }
   }
+}
+
+const groupPhotoPath = path.join(root, 'assets', 'photo-group-1993-4mp.jpg');
+if (fs.existsSync(groupPhotoPath) && fs.statSync(groupPhotoPath).size < 150000) {
+  failures.push('高解析團體合照檔案過小，疑似回退為縮圖或佔位圖');
 }
 
 for (const oldAsset of ['roster.svg','tape.svg']) {
