@@ -7,14 +7,15 @@ const required = [
   'index.html','about.html','news.html','exhibit.html','gallery.html','photo.html','records.html',
   'roster.html','broadcast.html','mail.html','revision.html','restore.html','log.html',
   'letter.html','sitemap.html','404.html','styles.css',
-  'assets/photo-group-1993.jpg','assets/tape.svg','assets/roster.svg'
+  'assets/photo-group-1993.jpg','assets/roster-final.jpg','assets/tape-final.jpg'
 ];
 const forbidden = [
   '<button', 'data-answer', 'data-record', 'echoArchiveProgress', 'localStorage',
   '你的判斷', '需要提示', '清除進度', '推理成立', '答對', '答錯',
   '第一關', '第二關', '關卡', '遊戲進度',
   '以下素材均為本作品原創虛構內容', '顯示檢查：', '可驗證的網站資產',
-  '不再使用拼貼圖切片', '不會再受錯誤 JPEG'
+  '不再使用拼貼圖切片', '不會再受錯誤 JPEG',
+  'assets/roster.svg', 'assets/tape.svg'
 ];
 
 const failures = [];
@@ -58,20 +59,18 @@ for (const file of htmlFiles) {
   }
 }
 
-for (const svgName of ['tape.svg','roster.svg']) {
-  const svgPath = path.join(root, 'assets', svgName);
-  if (fs.existsSync(svgPath)) {
-    const svg = fs.readFileSync(svgPath, 'utf8');
-    if (!svg.trimStart().startsWith('<svg')) failures.push(`assets/${svgName} 不是有效 SVG 文字檔`);
+for (const jpgName of ['photo-group-1993.jpg','roster-final.jpg','tape-final.jpg']) {
+  const jpgPath = path.join(root, 'assets', jpgName);
+  if (fs.existsSync(jpgPath)) {
+    const head = fs.readFileSync(jpgPath).subarray(0, 3);
+    if (!(head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff)) {
+      failures.push(`assets/${jpgName} 不是有效 JPEG`);
+    }
   }
 }
 
-const groupPhoto = path.join(root, 'assets', 'photo-group-1993.jpg');
-if (fs.existsSync(groupPhoto)) {
-  const head = fs.readFileSync(groupPhoto).subarray(0, 3);
-  if (!(head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff)) {
-    failures.push('assets/photo-group-1993.jpg 不是有效 JPEG');
-  }
+for (const oldAsset of ['roster.svg','tape.svg']) {
+  if (fs.existsSync(path.join(root, 'assets', oldAsset))) failures.push(`舊示意素材仍存在：assets/${oldAsset}`);
 }
 
 if (fs.existsSync(path.join(root, 'app.js'))) failures.push('舊版 app.js 仍存在');
@@ -82,4 +81,4 @@ if (failures.length) {
   failures.forEach(x => console.error(`- ${x}`));
   process.exit(1);
 }
-console.log(`Echo Archive v2 發布檢查通過：${htmlFiles.length} 個 HTML 頁面、所有連結與必要美術資產有效，未發現遊戲 UI 或製作註解。`);
+console.log(`Echo Archive v2 發布檢查通過：${htmlFiles.length} 個 HTML 頁面、所有連結與正式美術資產有效，未發現遊戲 UI、製作註解或舊示意素材。`);
